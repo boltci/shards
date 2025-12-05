@@ -2,6 +2,7 @@
   "name": "boltci/shards",
   "description": "Patch PHPUnit and Paratest to shard your Laravel test suite.",
   "type": "library",
+  "license": "MIT",
   "require": {
     "php": "^8.2",
     "illuminate/testing": "^10.0|^11.0|^12.0",
