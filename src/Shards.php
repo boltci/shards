@@ -12,12 +12,17 @@ class Shards
 
     /**
      * @param  string  $key  The shard key, e.g. "1/3"
+     * @param  int|null  $shuffleSeed  An optional seed for shuffling the tests, e.g. 1
      */
-    public function get(string $key): TestSuite
+    public function get(string $key, ?int $shuffleSeed = null): TestSuite
     {
         [$shardNumber, $shardsCount] = $this->parseKey($key);
 
         $allTests = $this->flatten($this->testSuite);
+
+        if ($shuffleSeed) {
+            $allTests = $this->shuffle($allTests, $shuffleSeed);
+        }
 
         [$offset, $length] = $this->determineSlice(count($allTests), $shardNumber, $shardsCount);
 
@@ -71,5 +76,21 @@ class Shards
         }
 
         return $flattened;
+    }
+
+    protected function shuffle(array $items, int $seed): array
+    {
+        $generatePseudoRandomNumberUsingLinearCongruentialGenerator = function () use (&$seed) {
+            $seed = ($seed * 1103515245 + 12345) & 0x7FFFFFFF;
+
+            return $seed / 0x7FFFFFFF;
+        };
+        $shuffled = $items;
+        for ($i = count($shuffled) - 1; $i > 0; $i--) {
+            $randomIndex = (int) floor($generatePseudoRandomNumberUsingLinearCongruentialGenerator() * ($i + 1));
+            [$shuffled[$i], $shuffled[$randomIndex]] = [$shuffled[$randomIndex], $shuffled[$i]];
+        }
+
+        return $shuffled;
     }
 }

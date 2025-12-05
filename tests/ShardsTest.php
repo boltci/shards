@@ -27,6 +27,72 @@ class ShardsTest extends TestCase
         $this->assertEqualsCanonicalizing($expectedTests, collect($shard->tests())->pluck('id')->all());
     }
 
+    #[Test, DataProvider('invalidKeyProvider')]
+    public function it_throws_exception_for_invalid_key(string $invalidKey): void
+    {
+        // Given
+        $suite = $this->createTestSuite('Test Suite', ['t1', 't2', 't3']);
+        $shards = new Shards($suite);
+
+        // When
+        $getShards = fn () => $shards->get($invalidKey);
+
+        // Then
+        $this->expectException(\InvalidArgumentException::class);
+        $getShards();
+    }
+
+    #[Test]
+    public function it_shuffles_tests(): void
+    {
+        // Given
+        $tests = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8', 't9', 't10'];
+        $suite = $this->createTestSuite('Test Suite', $tests);
+
+        // When
+        $shards = new Shards($suite);
+        $shard = $shards->get('1/1', 1);
+
+        // Then
+        $shuffledTests = collect($shard->tests())->pluck('id')->all();
+        $this->assertEqualsCanonicalizing($tests, $shuffledTests);
+        $this->assertNotEquals($tests, $shuffledTests);
+    }
+
+    #[Test]
+    public function it_shuffles_tests_deterministically(): void
+    {
+        // Given
+        $tests = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8', 't9', 't10'];
+        $suite = $this->createTestSuite('Test Suite', $tests);
+
+        // When
+        $shards = new Shards($suite);
+        $shard1 = $shards->get('1/1', 42);
+        $shard2 = $shards->get('1/1', 42);
+
+        // Then
+        $shuffledTests1 = collect($shard1->tests())->pluck('id')->all();
+        $shuffledTests2 = collect($shard2->tests())->pluck('id')->all();
+        $this->assertEquals($shuffledTests1, $shuffledTests2);
+    }
+
+    #[Test]
+    public function it_does_not_shuffle_tests_when_no_seed_is_provided(): void
+    {
+        // Given
+        $tests = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8', 't9', 't10'];
+        $suite = $this->createTestSuite('Test Suite', $tests);
+
+        // When
+        $shards = new Shards($suite);
+        $shard = $shards->get('1/1');
+
+        // Then
+        $shuffledTests = collect($shard->tests())->pluck('id')->all();
+        $this->assertEquals($tests, $shuffledTests);
+    }
+
     public static function provider(): array
     {
         return [
@@ -80,6 +146,18 @@ class ShardsTest extends TestCase
                 'key' => '10/10',
                 'expectedTests' => ['t10'],
             ],
+        ];
+    }
+
+    public static function invalidKeyProvider(): array
+    {
+        return [
+            ['invalid'],
+            ['0/2'],
+            ['3/2'],
+            ['-1/2'],
+            ['1/0'],
+            ['1/-2'],
         ];
     }
 

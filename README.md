@@ -62,6 +62,15 @@ where `x` is the shard number and `y` is the total number of shards.
 BOLTCI_SHARD=1/5 php artisan test
 ```
 
+You can optionally set the `BOLTCI_SHARD_SEED` variable to any positive integers to shuffle the test order using a
+deterministic seed (i.e. the same seed will always produce the same test order):
+
+```bash
+BOLTCI_SHARD=1/5 BOLTCI_SHARD_SEED=1 php artisan test
+```
+
+This is useful to help distribute tests more evenly across shards.
+
 ## Credits
 
 - The first version of this code was first written for internal use at [Springloaded](https://springloaded.co).
