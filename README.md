@@ -48,7 +48,7 @@ This command modifies the PHPUnit test suite builder to shard tests based on you
 If you're using ParaTest versions between 7.2.0 and 7.4.2, you may need to apply a compatibility patch:
 
 ```bash
-php artisan shards:patch-paratest
+php artisan boltci:patch-paratest
 ```
 
 **Note**: ParaTest 7.4.3 and above have the issue fixed and don't require patching.

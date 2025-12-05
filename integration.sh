@@ -28,8 +28,8 @@ composer config repositories.boltci/shards path ../
 composer require "boltci/shards:$version"
 
 # Patch PHPUnit and Paratest
-php artisan bolt:patch-phpunit
-php artisan bolt:patch-paratest
+php artisan boltci:patch-phpunit
+php artisan boltci:patch-paratest
 
 # Define color codes
 GREEN='\033[0;32m'
