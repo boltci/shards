@@ -4,7 +4,7 @@ namespace BoltCI\Shards;
 
 use Illuminate\Support\ServiceProvider;
 
-class BoltCIShardsServiceProvider extends ServiceProvider
+class ShardsServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
