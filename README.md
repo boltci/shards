@@ -79,5 +79,5 @@ This is useful to help distribute tests more evenly across shards.
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
