@@ -1,5 +1,8 @@
 # Shards
 
+[![Unit Tests](https://github.com/boltci/shards/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/boltci/shards/actions/workflows/unit-tests.yml)
+[![Integration Tests](https://github.com/boltci/shards/actions/workflows/integration-tests.yml/badge.svg)](https://github.com/boltci/shards/actions/workflows/integration-tests.yml)
+
 Patch PHPUnit and Paratest to shard your Laravel test suite.
 
 ## Caveats
