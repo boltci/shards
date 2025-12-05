@@ -15,7 +15,7 @@ You should only use this as a last resort if your version of testing framework d
 
 ## Supported Versions
 
-- PHP 8.1 or higher
+- PHP 8.2 or higher
 - Laravel 10.x or higher
 - PHPUnit 10.x or higher
 - ParaTest 7.2.0 or higher
