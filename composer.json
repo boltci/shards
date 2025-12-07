@@ -27,7 +27,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "ShardsServiceProvider"
+        "BoltCI\\Shards\\ShardsServiceProvider"
       ]
     }
   }
