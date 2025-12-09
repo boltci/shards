@@ -69,6 +69,13 @@ deterministic seed (i.e. the same seed will always produce the same test order):
 SHARD=1/5 SEED=1 php artisan test
 ```
 
+When using ParaTest (by passing `--parallel`), include the `--functional` flag to parallelize by Test to avoid overlaps
+between shards:
+
+```bash
+SHARD=1/5 SEED=1 php artisan test --parallel --functional
+```
+
 This is useful to help distribute tests more evenly across shards.
 
 ## Credits
