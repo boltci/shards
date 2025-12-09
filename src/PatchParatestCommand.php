@@ -10,7 +10,7 @@ class PatchParatestCommand extends Command
 {
     use CanPatchFiles;
 
-    protected $signature = 'boltci:patch-paratest';
+    protected $signature = 'shards:patch-paratest';
 
     public function handle(): int
     {

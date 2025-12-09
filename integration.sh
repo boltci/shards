@@ -28,8 +28,8 @@ composer config repositories.boltci/shards path ../
 composer require "boltci/shards:$version"
 
 # Patch PHPUnit and Paratest
-php artisan boltci:patch-phpunit
-php artisan boltci:patch-paratest
+php artisan shards:patch-phpunit
+php artisan shards:patch-paratest
 
 # Define color codes
 GREEN='\033[0;32m'
@@ -63,7 +63,7 @@ assert \
     "2 tests and 2 assertions without BOLT"
 
 assert \
-    "BOLTCI_SHARD=1/2 php artisan test --parallel --functional" \
+    "SHARD=1/2 php artisan test --parallel --functional" \
     "Tests: 1, Assertions: 1|1 test, 1 assertion" \
     "1 test and 1 assertion with BOLT and --parallel"
 
@@ -73,6 +73,6 @@ assert \
     "2 passed without BOLT and without --parallel"
 
 assert \
-    "BOLTCI_SHARD=1/2 php artisan test" \
+    "SHARD=1/2 php artisan test" \
     "1 passed" \
     "1 passed with BOLT without --parallel"

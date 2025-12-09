@@ -48,25 +48,25 @@ This command modifies the PHPUnit test suite builder to shard tests based on you
 If you're using ParaTest versions between 7.2.0 and 7.4.2, you may need to apply a compatibility patch:
 
 ```bash
-php artisan boltci:patch-paratest
+php artisan shards:patch-paratest
 ```
 
 **Note**: ParaTest 7.4.3 and above have the issue fixed and don't require patching.
 
 ### 3. Run Your Tests
 
-Run your tests with the `BOLTCI_SHARD` environment variable set to specify which shard to run. The format is `x/y`,
+Run your tests with the `SHARD` environment variable set to specify which shard to run. The format is `x/y`,
 where `x` is the shard number and `y` is the total number of shards.
 
 ```bash
-BOLTCI_SHARD=1/5 php artisan test
+SHARD=1/5 php artisan test
 ```
 
-You can optionally set the `BOLTCI_SEED` variable to any positive integers to shuffle the test order using a
+You can optionally set the `SEED` variable to any positive integers to shuffle the test order using a
 deterministic seed (i.e. the same seed will always produce the same test order):
 
 ```bash
-BOLTCI_SHARD=1/5 BOLTCI_SEED=1 php artisan test
+SHARD=1/5 SEED=1 php artisan test
 ```
 
 This is useful to help distribute tests more evenly across shards.
