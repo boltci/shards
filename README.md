@@ -28,7 +28,7 @@ You should only use this as a last resort if your version of testing framework d
 Install the package via Composer:
 
 ```bash
-composer require boltci/shard --dev
+composer require boltci/shards --dev
 ```
 
 ## Usage
