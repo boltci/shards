@@ -76,3 +76,8 @@ assert \
     "SHARD=1/2 php artisan test" \
     "1 passed" \
     "1 passed with BOLT without --parallel"
+
+assert \
+    "SHARD=1/2 SEED=1 php artisan test" \
+    "1 passed" \
+    "1 passed with BOLT without --parallel"

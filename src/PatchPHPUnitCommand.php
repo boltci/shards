@@ -16,7 +16,7 @@ class PatchPHPUnitCommand extends Command
         $this->patch(
             base_path('vendor').'/phpunit/phpunit/src/TextUI/Configuration/TestSuiteBuilder.php',
             'return $testSuite;',
-            'return (new \BoltCI\Shards\Shards($testSuite))->get(getenv("SHARD") ?: "1/1", getenv("SEED") ?: null );'
+            'return (new \BoltCI\Shards\Shards($testSuite))->get(getenv("SHARD") ?: "1/1", (int) getenv("SEED") ?: null );'
         );
 
         $this->info('PHPUnit patched successfully.');
